@@ -18,6 +18,7 @@ BuildRequires: taglib-devel
 BuildRequires: ocaml-cry
 BuildRequires: ocaml-samplerate
 BuildRequires: ocaml-lame
+BuildRequires: lame-devel
 
 %prep
 %setup -q 
