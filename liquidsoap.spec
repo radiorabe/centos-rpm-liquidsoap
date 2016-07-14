@@ -15,6 +15,7 @@ BuildRequires: libmad-devel
 BuildRequires: libX11-devel
 BuildRequires: ocaml-taglib
 BuildRequires: taglib-devel
+BuildRequires: ocaml-cry
 
 %prep
 %setup -q 
