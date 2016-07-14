@@ -16,6 +16,7 @@ BuildRequires: libX11-devel
 BuildRequires: ocaml-taglib
 BuildRequires: taglib-devel
 BuildRequires: ocaml-cry
+BuildRequires: ocaml-samplerate
 
 %prep
 %setup -q 
