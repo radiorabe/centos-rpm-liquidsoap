@@ -21,6 +21,7 @@ BuildRequires: libsamplerate-devel
 BuildRequires: ocaml-lame
 BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
+BuildRequires: alsa-lib-devel
 
 %prep
 %setup -q 
