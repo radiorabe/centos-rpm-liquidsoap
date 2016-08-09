@@ -23,6 +23,9 @@ BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
 
+Requires: lame
+Requires: libmad
+
 %prep
 %setup -q 
 ./configure --disable-camomile
