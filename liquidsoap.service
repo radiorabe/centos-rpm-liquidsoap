@@ -1,0 +1,17 @@
+[Unit]
+Description=Liquidsoap
+Documentation=http://liquidsoap.fm man:liquidsoap(1)
+Requires=sound.target
+Wants=network-online.target
+After=network-online.target sound.target
+
+[Service]
+Type=simple
+ExecStartPre=-/bin/mkdir /var/log/liquidsoap
+ExecStartPre=-/bin/chown liquidsoap /var/log/liquidsoap
+ExecStart=/usr/bin/liquidsoap -c /etc/darkice.cfg -v
+User=liquidsoap
+Group=liquidsoap
+
+[Install]
+WantedBy=multi-user.target

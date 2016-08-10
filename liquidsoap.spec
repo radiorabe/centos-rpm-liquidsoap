@@ -5,6 +5,7 @@ Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/1.2.1/liquidsoap-1.2.1.tar.bz2
+Source1:  liquidsoap.service
 
 BuildRequires: ocaml
 BuildRequires: pcre-ocaml
@@ -36,6 +37,7 @@ make
 %install
 make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr sysconfdir=%{buildroot}/etc mandir=%{buildroot}/usr/share/man localstatedir=%{buildroot}/var
 /bin/install -c scripts/liquidtts %{buildroot}/usr/lib/%{name}/%{version}
+/bin/install -c %{SOURCE1} %{buildroot}/usr/lib/systemd/system/
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
@@ -46,6 +48,7 @@ exit 0
 
 %files
 /usr/bin/liquidsoap
+/usr/lib/systemd/system/liquidsoap.service
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
 /usr/lib/liquidsoap/1.2.1/externals.liq
