@@ -60,6 +60,7 @@ exit 0
 /usr/lib/liquidsoap/1.2.1/shoutcast.liq
 /usr/lib/liquidsoap/1.2.1/utils.liq
 /usr/lib/liquidsoap/1.2.1/video.liq
+/usr/lib/liquidsoap/1.2.1/liquidtts
 %doc
 /usr/share/doc/liquidsoap-1.2.1/examples/README
 /usr/share/doc/liquidsoap-1.2.1/examples/fallible.liq
