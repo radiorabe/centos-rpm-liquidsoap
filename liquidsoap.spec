@@ -28,11 +28,11 @@ Requires: libmad
 
 %prep
 %setup -q 
-./configure --disable-camomile --prefix=/usr
+./configure --disable-camomile --prefix=/usr --configuration=/etc/liquidsoap
 make
 
 %install
-make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr/
+make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr/ configuration=${buildroot}/etc/liquidsoap
 
 %files
 /usr/bin/liquidsoap
