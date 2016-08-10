@@ -32,30 +32,30 @@ Requires: libmad
 make
 
 %install
-make install DESTDIR=%{buildroot} OCAMLFIND_DESTDIR=%{buildroot} prefix=%{buildroot}
+make install DESTDIR=%{buildroot}usr/ OCAMLFIND_DESTDIR=%{buildroot}usr/ prefix=%{buildroot}usr/
 
 %files
-/bin/liquidsoap
+/usr/bin/liquidsoap
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
-/lib/liquidsoap/1.2.1/externals.liq
-/lib/liquidsoap/1.2.1/extract-replaygain
-/lib/liquidsoap/1.2.1/flows.liq
-/lib/liquidsoap/1.2.1/gstreamer.liq
-/lib/liquidsoap/1.2.1/http.liq
-/lib/liquidsoap/1.2.1/http_codes.liq
-/lib/liquidsoap/1.2.1/lastfm.liq
-/lib/liquidsoap/1.2.1/pervasives.liq
-/lib/liquidsoap/1.2.1/shoutcast.liq
-/lib/liquidsoap/1.2.1/utils.liq
-/lib/liquidsoap/1.2.1/video.liq
+/usr/lib/liquidsoap/1.2.1/externals.liq
+/usr/lib/liquidsoap/1.2.1/extract-replaygain
+/usr/lib/liquidsoap/1.2.1/flows.liq
+/usr/lib/liquidsoap/1.2.1/gstreamer.liq
+/usr/lib/liquidsoap/1.2.1/http.liq
+/usr/lib/liquidsoap/1.2.1/http_codes.liq
+/usr/lib/liquidsoap/1.2.1/lastfm.liq
+/usr/lib/liquidsoap/1.2.1/pervasives.liq
+/usr/lib/liquidsoap/1.2.1/shoutcast.liq
+/usr/lib/liquidsoap/1.2.1/utils.liq
+/usr/lib/liquidsoap/1.2.1/video.liq
 %doc
-/share/doc/liquidsoap-1.2.1/examples/README
-/share/doc/liquidsoap-1.2.1/examples/fallible.liq
-/share/doc/liquidsoap-1.2.1/examples/geek.liq
-/share/doc/liquidsoap-1.2.1/examples/radio.liq
-/share/doc/liquidsoap-1.2.1/examples/transitions.liq
-/share/man/man1/liquidsoap.1
+/usr/share/doc/liquidsoap-1.2.1/examples/README
+/usr/share/doc/liquidsoap-1.2.1/examples/fallible.liq
+/usr/share/doc/liquidsoap-1.2.1/examples/geek.liq
+/usr/share/doc/liquidsoap-1.2.1/examples/radio.liq
+/usr/share/doc/liquidsoap-1.2.1/examples/transitions.liq
+/usr/share/man/man1/liquidsoap.1
 
 %description
 Liquidsoap is a powerful and flexible language for describing your streams. It offers a rich collection of operators that you can combine at will, giving you more power than you need for creating or transforming streams. But liquidsoap is still very light and easy to use, in the Unix tradition of simple strong components working together.
