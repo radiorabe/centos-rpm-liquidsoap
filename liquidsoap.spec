@@ -30,8 +30,8 @@ Requires(pre): shadow-utils
 Requires: lame
 Requires: libmadA
 
-Suggests: festival
-Suggests: sox
+Recommends: festival
+Recommends: sox
 
 %prep
 %setup -q 
