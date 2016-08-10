@@ -22,10 +22,6 @@ BuildRequires: ocaml-lame
 BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
-BuildRequires: festival
-BuildRequires: festival-devel
-BuildRequires: sox
-BuildRequires: sox-devel
 
 Requires(pre): shadow-utils
 
@@ -39,6 +35,7 @@ make
 
 %install
 make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr sysconfdir=%{buildroot}/etc mandir=%{buildroot}/usr/share/man localstatedir=%{buildroot}/var
+/bin/install -c scripts/liquidtts %{buildroot}/usr/lib/%{name}/%{version}
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
@@ -62,6 +59,7 @@ exit 0
 /usr/lib/liquidsoap/1.2.1/shoutcast.liq
 /usr/lib/liquidsoap/1.2.1/utils.liq
 /usr/lib/liquidsoap/1.2.1/video.liq
+/usr/lib/liquidsoap/1.2.1/liquidtts
 %doc
 /usr/share/doc/liquidsoap-1.2.1/examples/README
 /usr/share/doc/liquidsoap-1.2.1/examples/fallible.liq
