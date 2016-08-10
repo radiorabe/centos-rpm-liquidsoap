@@ -24,6 +24,8 @@ BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
 BuildRequires: festival
 BuildRequires: festival-devel
+BuildRequires: sox
+BuildRequires: sox-devel
 
 Requires(pre): shadow-utils
 
