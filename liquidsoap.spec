@@ -39,7 +39,7 @@ make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefi
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
 getent passwd liquidsoap >/dev/null || \
-    useradd -r -g liquidsoap -s /sbin/nologin \
+    useradd -r -g liquidsoap -d /var/lib/liquidsoap -m \
     -c "Liquidsoap system user account"i liquidsoap
 exit 0
 
