@@ -26,7 +26,7 @@ BuildRequires: alsa-lib-devel
 Requires(pre): shadow-utils
 
 Requires: lame
-Requires: libmadA
+Requires: libmad
 
 %prep
 %setup -q 
