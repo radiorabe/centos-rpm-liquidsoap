@@ -23,6 +23,8 @@ BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
 
+Requires(pre): shadow-utils
+
 Requires: lame
 Requires: libmad
 
@@ -33,6 +35,13 @@ make
 
 %install
 make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr sysconfdir=%{buildroot}/etc mandir=%{buildroot}/usr/share/man localstatedir=%{buildroot}/var
+
+%pre
+getent group liquidsoap >/dev/null || groupadd -r liquidsoap
+getent passwd liquidsoap >/dev/null || \
+    useradd -r -g liquidsoap -s /sbin/nologin \
+    -c "Liquidsoap system user account"i liquidsoap
+exit 0
 
 %files
 /usr/bin/liquidsoap
