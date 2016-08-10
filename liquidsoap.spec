@@ -32,7 +32,7 @@ Requires: libmad
 make
 
 %install
-make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr/ sysconfdir=${buildroot}/etc/
+make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr/ sysconfdir=%{buildroot}/etc/
 
 %files
 /usr/bin/liquidsoap
