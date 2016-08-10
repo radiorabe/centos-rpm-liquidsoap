@@ -30,9 +30,6 @@ Requires(pre): shadow-utils
 Requires: lame
 Requires: libmadA
 
-Recommends: festival
-Recommends: sox
-
 %prep
 %setup -q 
 ./configure --disable-camomile --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var
