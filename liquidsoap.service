@@ -9,7 +9,7 @@ After=network-online.target sound.target
 Type=simple
 ExecStartPre=-/bin/mkdir /var/log/liquidsoap
 ExecStartPre=-/bin/chown liquidsoap /var/log/liquidsoap
-ExecStart=/usr/bin/liquidsoap -c /etc/darkice.cfg -v
+ExecStart=/usr/bin/liquidsoap -v /etc/liquidsoap/radio.liq
 User=liquidsoap
 Group=liquidsoap
 
