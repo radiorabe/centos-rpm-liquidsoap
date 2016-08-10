@@ -38,7 +38,7 @@ make
 make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr sysconfdir=%{buildroot}/etc mandir=%{buildroot}/usr/share/man localstatedir=%{buildroot}/var
 /bin/install -c scripts/liquidtts %{buildroot}/usr/lib/%{name}/%{version}
 /bin/install -d %{buildroot}/usr/lib/systemd/system/
-/bin/install -c %{SOURCE1} %{buildroot}/usr/lib/systemd/system/
+/bin/install -c %{SOURCE1} -m 644 %{buildroot}/usr/lib/systemd/system/
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
