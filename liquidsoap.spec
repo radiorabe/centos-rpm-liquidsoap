@@ -22,11 +22,16 @@ BuildRequires: ocaml-lame
 BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
+BuildRequires: festival
+BuildRequires: festival-devel
 
 Requires(pre): shadow-utils
 
 Requires: lame
-Requires: libmad
+Requires: libmadA
+
+Suggests: festival
+Suggests: sox
 
 %prep
 %setup -q 
