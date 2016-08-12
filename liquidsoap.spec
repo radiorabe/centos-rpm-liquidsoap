@@ -5,7 +5,7 @@ Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/1.2.1/liquidsoap-1.2.1.tar.bz2
-Source1:  liquidsoap.service
+Source1:  liquidsoap@.service
 
 BuildRequires: ocaml
 BuildRequires: pcre-ocaml
@@ -49,7 +49,7 @@ exit 0
 
 %files
 /usr/bin/liquidsoap
-/usr/lib/systemd/system/liquidsoap.service
+/usr/lib/systemd/system/liquidsoap@.service
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
 /usr/lib/liquidsoap/1.2.1/externals.liq

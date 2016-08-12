@@ -6,10 +6,10 @@ Wants=network-online.target
 After=network-online.target sound.target
 
 [Service]
-Type=simple
+PermissionsStartOnly=true
 ExecStartPre=-/bin/mkdir /var/log/liquidsoap
 ExecStartPre=-/bin/chown liquidsoap /var/log/liquidsoap
-ExecStart=/usr/bin/liquidsoap -v /etc/liquidsoap/radio.liq
+ExecStart=/usr/bin/liquidsoap -v /etc/liquidsoap/%i.liq
 User=liquidsoap
 Group=liquidsoap
 
