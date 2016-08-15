@@ -23,6 +23,8 @@ BuildRequires: ocaml-lame
 BuildRequires: lame-devel
 BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
+BuildRequires: ocaml-vorbis
+BuildRequires: libvorbis-devel
 
 Requires(pre): shadow-utils
 
