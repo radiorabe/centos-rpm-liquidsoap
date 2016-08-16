@@ -40,6 +40,8 @@ BuildRequires: ocaml-ladspa
 BuildRequires: ladspa-devel
 BuildRequires: ocaml-soundtouch
 BuildRequires: soundtouch-devel
+BuildRequires: ocaml-magic
+BuildRequires: file-devel
 
 Requires(pre): shadow-utils
 
