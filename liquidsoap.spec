@@ -33,6 +33,8 @@ BuildRequires: ocaml-speex
 BuildRequires: speex-devel
 BuildRequires: ocaml-schroedinger
 BuildRequires: schroedinger-devel
+BuildRequires: ocaml-xmlm-devel
+BuildRequires: ocaml-xmlm
 BuildRequires: ocaml-xmlplaylist
 BuildRequires: ocaml-ladspa
 BuildRequires: ladspa-devel
