@@ -25,6 +25,10 @@ BuildRequires: ocaml-alsa
 BuildRequires: alsa-lib-devel
 BuildRequires: ocaml-vorbis
 BuildRequires: libvorbis-devel
+BuildRequires: ocaml-opus
+BuildRequires: opus-devel
+BuildRequires: ocaml-flac
+BuildRequires: flac-devel
 
 Requires(pre): shadow-utils
 
