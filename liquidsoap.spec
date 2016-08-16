@@ -42,7 +42,8 @@ BuildRequires: ocaml-soundtouch
 BuildRequires: soundtouch-devel
 BuildRequires: ocaml-magic
 BuildRequires: file-devel
-BuildRequires: ocaml-ssl
+BuildRequires: ocaml-inotify
+BuildRequires: ocaml-ssl-devel
 
 Requires(pre): shadow-utils
 
