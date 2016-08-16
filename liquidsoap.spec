@@ -34,6 +34,10 @@ BuildRequires: speex-devel
 BuildRequires: ocaml-schroedinger
 BuildRequires: schroedinger-devel
 BuildRequires: ocaml-xmlplaylist
+BuildRequires: ocaml-ladspa
+BuildRequires: ladspa-devel
+BuildRequires: ocaml-soundtouch
+BuildRequires: soundtouch-devel
 
 Requires(pre): shadow-utils
 
