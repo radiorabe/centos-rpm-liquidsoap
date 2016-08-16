@@ -29,6 +29,11 @@ BuildRequires: ocaml-opus
 BuildRequires: opus-devel
 BuildRequires: ocaml-flac
 BuildRequires: flac-devel
+BuildRequires: ocaml-speex
+BuildRequires: speex-devel
+BuildRequires: ocaml-schroedinger
+BuildRequires: schroedinger-devel
+BuildRequires: ocaml-xmlplaylist
 
 Requires(pre): shadow-utils
 
