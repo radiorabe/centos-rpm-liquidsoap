@@ -43,6 +43,9 @@ BuildRequires: soundtouch-devel
 BuildRequires: ocaml-magic
 BuildRequires: file-devel
 BuildRequires: ocaml-ssl-devel
+BuildRequires: ocaml-yojson-devel
+BuildRequires: ocaml-inotify
+BuildRequires: inotify-tools-devel
 
 Requires(pre): shadow-utils
 
