@@ -46,6 +46,7 @@ BuildRequires: ocaml-ssl-devel
 BuildRequires: ocaml-yojson-devel
 BuildRequires: ocaml-inotify
 BuildRequires: inotify-tools-devel
+BuildRequires: ocaml-biniou
 
 Requires(pre): shadow-utils
 
