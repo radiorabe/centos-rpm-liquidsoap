@@ -48,6 +48,8 @@ BuildRequires: ocaml-inotify
 BuildRequires: inotify-tools-devel
 BuildRequires: ocaml-biniou-devel
 BuildRequires: ocaml-biniou
+BuildRequires: ocaml-easy-format-devel
+BuildRequires: ocaml-easy-format
 
 Requires(pre): shadow-utils
 
