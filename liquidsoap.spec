@@ -52,7 +52,8 @@ BuildRequires: ocaml-biniou-devel
 BuildRequires: ocaml-biniou
 BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-easy-format
-BUildRequires: ocaml-fdkaac-devel
+BuildRequires: ocaml-fdkaac-devel
+BuildRequires: ocaml-fdkaac
 
 Requires(pre): shadow-utils
 
