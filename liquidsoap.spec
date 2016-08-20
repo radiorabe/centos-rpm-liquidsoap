@@ -6,6 +6,8 @@ License:  GPLv2
 URL:      http://savonet.sourceforge.net/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/1.2.1/liquidsoap-1.2.1.tar.bz2
 Source1:  liquidsoap@.service
+# lib64 search path for ladspa https://github.com/savonet/liquidsoap/pull/349
+Patch0:   https://patch-diff.githubusercontent.com/raw/savonet/liquidsoap/pull/349.patch
 
 BuildRequires: ocaml
 BuildRequires: pcre-ocaml
@@ -58,6 +60,7 @@ Requires: libmad
 
 %prep
 %setup -q 
+%patch0 -p1
 ./configure --disable-camomile --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var
 make
 
