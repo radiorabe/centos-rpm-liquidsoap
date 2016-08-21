@@ -23,8 +23,7 @@ BuildRequires: ocaml-samplerate
 BuildRequires: libsamplerate-devel
 BuildRequires: ocaml-lame
 BuildRequires: lame-devel
-BuildRequires: ocaml-alsa
-BuildRequires: alsa-lib-devel
+BuildRequires: ocaml-alsa-devel
 BuildRequires: ocaml-vorbis
 BuildRequires: libvorbis-devel
 BuildRequires: ocaml-opus
