@@ -54,6 +54,8 @@ BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-easy-format
 BuildRequires: ocaml-fdkaac-devel
 BuildRequires: ocaml-fdkaac
+BuildRequires: libtheora-devel
+BuildRequires: faad2-devel
 
 Requires(pre): shadow-utils
 
