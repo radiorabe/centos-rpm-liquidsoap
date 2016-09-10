@@ -1,6 +1,6 @@
 Name:     liquidsoap 
 Version:  1.2.1
-Release:  3
+Release:  4
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
@@ -75,8 +75,8 @@ make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefi
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
 getent passwd liquidsoap >/dev/null || \
-    useradd -r -g liquidsoap -d /var/lib/liquidsoap -m \
-    -c "Liquidsoap system user account"i liquidsoap
+    useradd -r -g liquidsoap -G audio -d /var/lib/liquidsoap -m \
+    -c "Liquidsoap system user account" liquidsoap
 exit 0
 
 %files
@@ -108,6 +108,9 @@ exit 0
 Liquidsoap is a powerful and flexible language for describing your streams. It offers a rich collection of operators that you can combine at will, giving you more power than you need for creating or transforming streams. But liquidsoap is still very light and easy to use, in the Unix tradition of simple strong components working together.
 
 %changelog
+* Sat Sep 10 2016 Christian Affolter <c.affolter@purplehaze.ch> - 1.2.1-4
+- Fixed ALSA access by adding the liquidsoap user to the audio group
+
 * Sat Jul  3 2016 Lucas Bickel <hairmare@rabe.ch>
 - updated to liquidsoap 1.2.1
 - changed source location to github
