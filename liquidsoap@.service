@@ -7,7 +7,7 @@ After=network-online.target sound.target
 
 [Service]
 PermissionsStartOnly=true
-ExecStartPre=-/bin/mkdir /var/log/liquidsoap
+ExecStartPre=-/bin/mkdir -p /var/log/liquidsoap
 ExecStartPre=-/bin/chown liquidsoap /var/log/liquidsoap
 ExecStart=/usr/bin/liquidsoap -v /etc/liquidsoap/%i.liq
 User=liquidsoap
