@@ -4,12 +4,14 @@ Release:  3
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
-Source0:  https://github.com/savonet/liquidsoap/releases/download/1.2.1/liquidsoap-1.2.1.tar.bz2
+Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/liquidsoap-%{version}.tar.bz2
 Source1:  liquidsoap@.service
 # lib64 search path for ladspa https://github.com/savonet/liquidsoap/pull/349
 Patch0:   https://patch-diff.githubusercontent.com/raw/savonet/liquidsoap/pull/349.patch
 
+BuildRequires: libstdc++-static
 BuildRequires: ocaml
+BuildRequires: ocaml-findlib
 BuildRequires: pcre-ocaml
 BuildRequires: ocaml-duppy
 BuildRequires: ocaml-dtools
@@ -60,57 +62,40 @@ Requires(pre): shadow-utils
 Requires: lame
 Requires: libmad
 
+%description
+Liquidsoap is a powerful and flexible language for describing your streams. It offers a rich collection of
+operators that you can combine at will, giving you more power than you need for creating or transforming
+streams. But liquidsoap is still very light and easy to use, in the Unix tradition of simple strong
+components working together.
+
 %prep
 %setup -q 
 %patch0 -p1
-./configure --disable-camomile --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var
+./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var
+
+%build
 make
 
 %install
-make install DESTDIR=%{buildroot}/usr/ OCAMLFIND_DESTDIR=%{buildroot}/usr/ prefix=%{buildroot}/usr sysconfdir=%{buildroot}/etc mandir=%{buildroot}/usr/share/man localstatedir=%{buildroot}/var
-/bin/install -c scripts/liquidtts %{buildroot}/usr/lib/%{name}/%{version}
-/bin/install -d %{buildroot}/usr/lib/systemd/system/
-/bin/install -c %{SOURCE1} -m 644 %{buildroot}/usr/lib/systemd/system/
+make install DESTDIR=%{buildroot}%{_exec_prefix} OCAMLFIND_DESTDIR=%{buildroot}%{_exec_prefix} prefix=%{buildroot}%{_exec_prefix} sysconfdir=%{buildroot}/etc mandir=%{buildroot}%{_exec_prefix}/share/man localstatedir=%{buildroot}/var
+/bin/install -c scripts/liquidtts %{buildroot}%{_exec_prefix}/lib/%{name}/%{version}
+/bin/install -d %{buildroot}%{_exec_prefix}/lib/systemd/system/
+/bin/install -c %{SOURCE1} -m 644 %{buildroot}%{_exec_prefix}/lib/systemd/system/
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
 getent passwd liquidsoap >/dev/null || \
     useradd -r -g liquidsoap -d /var/lib/liquidsoap -m \
-    -c "Liquidsoap system user account"i liquidsoap
+    -c "Liquidsoap system user account" liquidsoap
 exit 0
 
 %files
-/usr/bin/liquidsoap
-/usr/lib/systemd/system/liquidsoap@.service
+%{_exec_prefix}/bin/liquidsoap
+%{_exec_prefix}/lib/systemd/system/liquidsoap@.service
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
-/usr/lib/liquidsoap/1.2.1/externals.liq
-/usr/lib/liquidsoap/1.2.1/extract-replaygain
-/usr/lib/liquidsoap/1.2.1/flows.liq
-/usr/lib/liquidsoap/1.2.1/gstreamer.liq
-/usr/lib/liquidsoap/1.2.1/http.liq
-/usr/lib/liquidsoap/1.2.1/http_codes.liq
-/usr/lib/liquidsoap/1.2.1/lastfm.liq
-/usr/lib/liquidsoap/1.2.1/pervasives.liq
-/usr/lib/liquidsoap/1.2.1/shoutcast.liq
-/usr/lib/liquidsoap/1.2.1/utils.liq
-/usr/lib/liquidsoap/1.2.1/video.liq
-/usr/lib/liquidsoap/1.2.1/liquidtts
+%{_exec_prefix}/lib/liquidsoap/1.2.1/
+%doc README
 %doc
-/usr/share/doc/liquidsoap-1.2.1/examples/README
-/usr/share/doc/liquidsoap-1.2.1/examples/fallible.liq
-/usr/share/doc/liquidsoap-1.2.1/examples/geek.liq
-/usr/share/doc/liquidsoap-1.2.1/examples/radio.liq
-/usr/share/doc/liquidsoap-1.2.1/examples/transitions.liq
-/usr/share/man/man1/liquidsoap.1.gz
-
-%description
-Liquidsoap is a powerful and flexible language for describing your streams. It offers a rich collection of operators that you can combine at will, giving you more power than you need for creating or transforming streams. But liquidsoap is still very light and easy to use, in the Unix tradition of simple strong components working together.
-
-%changelog
-* Sat Jul  3 2016 Lucas Bickel <hairmare@rabe.ch>
-- updated to liquidsoap 1.2.1
-- changed source location to github
-- dont copy PACKAGES.minimal file
-* Sat Oct 21 2012 Martin Konecny <martin dot konecny at gmail.com> - 1.0-2
-- initial version 
+%{_exec_prefix}/share/doc/liquidsoap-1.2.1/examples/*.liq
+%{_exec_prefix}/share/man/man1/liquidsoap.1.gz
