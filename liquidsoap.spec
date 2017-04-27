@@ -1,13 +1,11 @@
 Name:     liquidsoap 
-Version:  1.2.1
-Release:  3
+Version:  1.3.0
+Release:  1
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/liquidsoap-%{version}.tar.bz2
 Source1:  liquidsoap@.service
-# lib64 search path for ladspa https://github.com/savonet/liquidsoap/pull/349
-Patch0:   https://patch-diff.githubusercontent.com/raw/savonet/liquidsoap/pull/349.patch
 
 BuildRequires: libstdc++-static
 BuildRequires: ocaml
@@ -34,8 +32,6 @@ BuildRequires: ocaml-flac
 BuildRequires: flac-devel
 BuildRequires: ocaml-speex
 BuildRequires: speex-devel
-BuildRequires: ocaml-schroedinger
-BuildRequires: schroedinger-devel
 BuildRequires: ocaml-xmlm-devel
 BuildRequires: ocaml-xmlm
 BuildRequires: ocaml-xmlplaylist
@@ -70,15 +66,13 @@ components working together.
 
 %prep
 %setup -q 
-%patch0 -p1
-./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var
+./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var --disable-ldconf
 
 %build
 make
 
 %install
 make install DESTDIR=%{buildroot}%{_exec_prefix} OCAMLFIND_DESTDIR=%{buildroot}%{_exec_prefix} prefix=%{buildroot}%{_exec_prefix} sysconfdir=%{buildroot}/etc mandir=%{buildroot}%{_exec_prefix}/share/man localstatedir=%{buildroot}/var
-/bin/install -c scripts/liquidtts %{buildroot}%{_exec_prefix}/lib/%{name}/%{version}
 /bin/install -d %{buildroot}%{_exec_prefix}/lib/systemd/system/
 /bin/install -c %{SOURCE1} -m 644 %{buildroot}%{_exec_prefix}/lib/systemd/system/
 
@@ -94,8 +88,8 @@ exit 0
 %{_exec_prefix}/lib/systemd/system/liquidsoap@.service
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
-%{_exec_prefix}/lib/liquidsoap/1.2.1/
+%{_exec_prefix}/lib/liquidsoap/%{version}/
 %doc README
 %doc
-%{_exec_prefix}/share/doc/liquidsoap-1.2.1/examples/*.liq
+%{_exec_prefix}/share/doc/liquidsoap-%{version}/examples/*.liq
 %{_exec_prefix}/share/man/man1/liquidsoap.1.gz
