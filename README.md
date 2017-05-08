@@ -34,7 +34,7 @@ systemctl enable liquidsoap@sine-example
 systemctl start liquidsoap@sine-example
 ```
 
-### Allow ASLA access for liquidsoap
+### Allow ALSA access for liquidsoap
 
 If your liquidsoap script needs to access ALSA you need to make sure the `liquidsoap` user is allowed to access the subsytem.
 
