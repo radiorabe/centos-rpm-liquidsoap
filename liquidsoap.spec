@@ -1,11 +1,12 @@
 Name:     liquidsoap 
 Version:  1.3.0
-Release:  1
+Release:  2
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
 URL:      http://savonet.sourceforge.net/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/liquidsoap-%{version}.tar.bz2
 Source1:  liquidsoap@.service
+Patch0:   https://github.com/savonet/liquidsoap/commit/a9ef199e9ac9087f932cfd1c379bfa7fe543f341.patch#?/liqidsoap-buffer-add-channel-a9ef199.patch
 
 BuildRequires: libstdc++-static
 BuildRequires: ocaml
@@ -65,7 +66,8 @@ streams. But liquidsoap is still very light and easy to use, in the Unix traditi
 components working together.
 
 %prep
-%setup -q 
+%setup -q
+%patch -P 0 -p 1
 ./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var --disable-ldconf
 
 %build
