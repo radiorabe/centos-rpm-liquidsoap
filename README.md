@@ -19,7 +19,7 @@ and to allow for unbloated installs where advanced features are not needed.
 
 You can run `liquidsoap` directly on the command line to verify it is working but will want to run scripts automatically as user `liquidsoap` at some stage.
 
-The RaBe liquidsoap distribution comes bundles with an instantiatable systemd service file that takes over the job of upstreams upstart config. While this
+The RaBe liquidsoap distribution comes bundles with an instantiable systemd service file that takes over the job of upstreams upstart config. While this
 does not automatically loop over `/etc/liquidsoap` and start all the contained scripts, configuring it is rather easy.
 
 ```bash
