@@ -42,4 +42,4 @@ If your liquidsoap script needs to access ALSA you need to make sure the `liquid
 usermod -G audio -a liquidsoap
 ```
 
-You could also create the `liquidsoap` user beforhand and ensure that it has access before installing liquidsoap.
+You could also create the `liquidsoap` user beforehand and ensure that it has access before installing liquidsoap.
