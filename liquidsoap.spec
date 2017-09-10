@@ -1,5 +1,5 @@
 Name:     liquidsoap 
-Version:  1.3.1
+Version:  1.3.2
 Release:  1
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
@@ -24,7 +24,7 @@ BuildRequires: libsamplerate-devel
 BuildRequires: ocaml-lame
 BuildRequires: lame-devel
 BuildRequires: ocaml-alsa-devel
-BuildRequires: ocaml-vorbis
+BuildRequires: ocaml-vorbis >= 0.7.0
 BuildRequires: libvorbis-devel
 BuildRequires: ocaml-opus
 BuildRequires: opus-devel
