@@ -119,7 +119,7 @@ exit 0
 
 %files
 %{_exec_prefix}/bin/liquidsoap
-%{_exec_prefix}/lib/systemd/system/liquidsoap@.service
+%{_unitdir}/liquidsoap@.service
 %config/etc/liquidsoap/radio.liq.example
 %config/etc/logrotate.d/liquidsoap
 %{_exec_prefix}/lib/liquidsoap/%{version}/
