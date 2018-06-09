@@ -27,7 +27,7 @@ Version:  1.3.3
 Release:  1%{?dist}
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
-URL:      http://savonet.sourceforge.net/
+URL:      http://liquidsoap.info/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/liquidsoap-%{version}.tar.bz2
 Source1:  liquidsoap@.service
 
