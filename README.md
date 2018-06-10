@@ -1,6 +1,6 @@
 # CentOS 7 RPM Specfile for liquidsoap
 
-This repository contains the specfile for liquidsoap which is part of the [RaBe liquidsoap distribution](https://build.opensuse.org/project/show/home:radiorabe:liquidsoap).
+This repository contains the specfile for [liquidsoap](http://liquidsoap.info/) which is part of the [RaBe liquidsoap distribution](https://build.opensuse.org/project/show/home:radiorabe:liquidsoap).
 
 It depends on `libmad` and `lame` from the [nux dextop repo](http://li.nux.ro/repos.html).
 
