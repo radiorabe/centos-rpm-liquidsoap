@@ -50,8 +50,6 @@ BuildRequires: ocaml-dtools
 BuildRequires: ocaml-duppy
 BuildRequires: ocaml-easy-format
 BuildRequires: ocaml-easy-format-devel
-BuildRequires: ocaml-faad-devel
-BuildRequires: ocaml-fdkaac-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac
 BuildRequires: ocaml-inotify
