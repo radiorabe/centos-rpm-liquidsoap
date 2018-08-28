@@ -55,6 +55,7 @@ BuildRequires: ocaml-fdkaac-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac
 BuildRequires: ocaml-inotify
+BuildRequires: ocaml-bjack-devel
 BuildRequires: ocaml-ladspa
 BuildRequires: ocaml-lame
 BuildRequires: ocaml-magic
