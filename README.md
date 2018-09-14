@@ -7,8 +7,11 @@ It depends on `libmad` and `lame` from the [nux dextop repo](http://li.nux.ro/re
 ## Install
 
 ```bash
-yum -y install epel-release && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-curl -o /etc/yum.repos.d/liquidsoap.repo http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
+yum install epel-release
+
+curl -o /etc/yum.repos.d/liquidsoap.repo \
+     http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
+
 yum install liquidsoap
 ```
 
@@ -43,3 +46,22 @@ usermod -G audio -a liquidsoap
 ```
 
 You could also create the `liquidsoap` user beforehand and ensure that it has access before installing liquidsoap.
+
+### Enable fdk-aac
+
+If you want to enable `%fdkaac` output you will need to provide a library that can be loaded dynamically.
+
+The following example uses `fdk-aac` from the [Nux Dextop Repos](https://li.nux.ro/repos.html) but the
+alternative packages available from [RPMFusion](https://rpmfusion.org) should work as well.
+
+```bash
+yum install http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+
+yum install ocaml-fdkaac
+```
+
+After installing the dynamic lib you can check the output of `liquidsoap -v 'out(sine())'` for the following line.
+
+```
+2018/09/14 16:46:50 [dynamic.loader:3] Loaded dynamic fdkaac encoder from /usr/lib64/ocaml/fdkaac
+```
