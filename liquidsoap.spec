@@ -23,7 +23,7 @@
 #
 
 Name:     liquidsoap 
-Version:  1.3.3
+Version:  1.3.4
 Release:  1%{?dist}
 Summary:  Liquidsoap by Savonet
 License:  GPLv2
@@ -71,7 +71,7 @@ BuildRequires: ocaml-xmlm-devel
 BuildRequires: ocaml-xmlplaylist
 BuildRequires: ocaml-yojson-devel
 BuildRequires: opus-devel
-BuildRequires: pcre-ocaml
+BuildRequires: ocaml-pcre-devel
 BuildRequires: soundtouch-devel
 BuildRequires: speex-devel
 BuildRequires: systemd
