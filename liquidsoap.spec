@@ -24,11 +24,12 @@
 
 Name:     liquidsoap 
 Version:  1.3.4
-Release:  1%{?dist}
-Summary:  Liquidsoap by Savonet
+Release:  2%{?dist}
+Summary:  Audio and video streaming language
+
 License:  GPLv2
 URL:      http://liquidsoap.info/
-Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/liquidsoap-%{version}.tar.bz2
+Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/%{name}-%{version}.tar.bz2
 Source1:  liquidsoap@.service
 
 BuildRequires: file-devel
@@ -43,62 +44,62 @@ BuildRequires: libstdc++-static
 BuildRequires: libvorbis-devel
 BuildRequires: ocaml
 BuildRequires: ocaml-alsa-devel
-BuildRequires: ocaml-biniou
 BuildRequires: ocaml-biniou-devel
-BuildRequires: ocaml-cry
-BuildRequires: ocaml-dtools
-BuildRequires: ocaml-duppy
-BuildRequires: ocaml-easy-format
+BuildRequires: ocaml-cry-devel
+BuildRequires: ocaml-dtools-devel
+BuildRequires: ocaml-duppy-devel
 BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-findlib
-BuildRequires: ocaml-flac
-BuildRequires: ocaml-inotify
+BuildRequires: ocaml-flac-devel
+BuildRequires: ocaml-inotify-devel
 BuildRequires: ocaml-bjack-devel
-BuildRequires: ocaml-ladspa
-BuildRequires: ocaml-lame
-BuildRequires: ocaml-magic
-BuildRequires: ocaml-mm
-BuildRequires: ocaml-opus
-BuildRequires: ocaml-samplerate
-BuildRequires: ocaml-soundtouch
-BuildRequires: ocaml-speex
+BuildRequires: ocaml-ladspa-devel
+BuildRequires: ocaml-lame-devel
+BuildRequires: ocaml-magic-devel
+BuildRequires: ocaml-mm-devel
+BuildRequires: ocaml-ogg-devel
+BuildRequires: ocaml-opus-devel
+BuildRequires: ocaml-pcre-devel
+BuildRequires: ocaml-samplerate-devel
+BuildRequires: ocaml-soundtouch-devel
+BuildRequires: ocaml-speex-devel
 BuildRequires: ocaml-ssl-devel
-BuildRequires: ocaml-taglib
+BuildRequires: ocaml-taglib-devel
 BuildRequires: ocaml-theora-devel
-BuildRequires: ocaml-vorbis >= 0.7.0
-BuildRequires: ocaml-xmlm
+BuildRequires: ocaml-vorbis-devel
 BuildRequires: ocaml-xmlm-devel
-BuildRequires: ocaml-xmlplaylist
+BuildRequires: ocaml-xmlplaylist-devel
 BuildRequires: ocaml-yojson-devel
 BuildRequires: opus-devel
-BuildRequires: ocaml-pcre-devel
 BuildRequires: soundtouch-devel
 BuildRequires: speex-devel
 BuildRequires: systemd
 BuildRequires: taglib-devel
-
+%{?systemd_requires}
 Requires(pre): shadow-utils
 
-Requires: lame
-Requires: libmad
 
 %description
-Liquidsoap is a powerful and flexible language for describing your streams. It offers a rich collection of
-operators that you can combine at will, giving you more power than you need for creating or transforming
-streams. But liquidsoap is still very light and easy to use, in the Unix tradition of simple strong
+Liquidsoap is a powerful and flexible language for describing your streams. It
+offers a rich collection of operators that you can combine at will, giving you
+more power than you need for creating or transforming streams. But liquidsoap
+is still very light and easy to use, in the Unix tradition of simple strong
 components working together.
+
 
 %prep
 %setup -q
-./configure --with-internal-glib --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=/etc --mandir=/usr/share/man --localstatedir=/var --disable-ldconf
+# do not use the configure rpm macro due to this not being a classical autoconf based configure script
+./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=%{_sysconfdir} --mandir=%{_mandir} --localstatedir=%{_localstatedir} --disable-ldconf
 
 %build
 make
 
 %install
-%make_install%{_exec_prefix} OCAMLFIND_DESTDIR=%{buildroot}%{_exec_prefix} prefix=%{buildroot}%{_exec_prefix} sysconfdir=%{buildroot}/etc mandir=%{buildroot}%{_exec_prefix}/share/man localstatedir=%{buildroot}/var
-/bin/install -d %{buildroot}%{_unitdir}
-/bin/install -c %{SOURCE1} -m 644 %{buildroot}%{_unitdir}
+# do not use the make_install rpm macro due to this not being a classical automake based makefile
+make install %{_exec_prefix} OCAMLFIND_DESTDIR=%{buildroot}%{_exec_prefix} prefix=%{buildroot}%{_exec_prefix} sysconfdir=%{buildroot}%{_sysconfdir} mandir=%{buildroot}%{_mandir} localstatedir=%{buildroot}%{_localstatedir}
+install -d %{buildroot}%{_unitdir}
+install -c %{SOURCE1} -m 644 %{buildroot}%{_unitdir}
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
@@ -120,9 +121,14 @@ exit 0
 %{_exec_prefix}/bin/liquidsoap
 %{_unitdir}/liquidsoap@.service
 %config/etc/liquidsoap/radio.liq.example
-%config/etc/logrotate.d/liquidsoap
+%config(noreplace)/etc/logrotate.d/liquidsoap
 %{_exec_prefix}/lib/liquidsoap/%{version}/
 %doc README
 %doc
 %{_exec_prefix}/share/doc/liquidsoap-%{version}/examples/*.liq
 %{_mandir}/man1/liquidsoap.1.*
+
+%changelog
+* Mon Dec 10 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.4-2
+- Initialize RPM changelog
+- Proper installation of runtime deps
