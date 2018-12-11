@@ -4,11 +4,22 @@
 
 set -xe
 
-curl -o /etc/yum.repos.d/liquidsoap.repo https://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
+OBS_OS=`source /etc/os-release; echo $ID`
 
-yum -y install \
-    epel-release \
-    http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+case $OBS_OS in
+"centos")
+    OBS_DIST="CentOS_7"
+    yum -y install \
+        epel-release \
+        http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+    ;;
+"fedora")
+    V=`source /etc/os-release; echo $VERSION_ID`
+    OBS_DIST="Fedora_${V}_standard"
+    ;;
+esac
+
+curl -o /etc/yum.repos.d/liquidsoap.repo "https://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/${OBS_DIST}/home:radiorabe:liquidsoap.repo"
 
 chown root:root liquidsoap.spec
 

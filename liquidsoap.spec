@@ -57,6 +57,7 @@ BuildRequires: ocaml-ladspa-devel
 BuildRequires: ocaml-lame-devel
 BuildRequires: ocaml-magic-devel
 BuildRequires: ocaml-mm-devel
+BuildRequires: ocaml-ocamldoc
 BuildRequires: ocaml-ogg-devel
 BuildRequires: ocaml-opus-devel
 BuildRequires: ocaml-pcre-devel
@@ -71,11 +72,15 @@ BuildRequires: ocaml-xmlm-devel
 BuildRequires: ocaml-xmlplaylist-devel
 BuildRequires: ocaml-yojson-devel
 BuildRequires: opus-devel
+BuildRequires: perl-XML-DOM
+BuildRequires: pcre-devel
 BuildRequires: soundtouch-devel
 BuildRequires: speex-devel
 BuildRequires: systemd
 BuildRequires: taglib-devel
 %{?systemd_requires}
+# needed to find pkg-config in my fedora containers since they do not include which
+%{?fedora:BuildRequires: which}
 Requires(pre): shadow-utils
 
 
@@ -87,13 +92,26 @@ is still very light and easy to use, in the Unix tradition of simple strong
 components working together.
 
 
+%package     doc
+Summary:     HTML documentation for %{name}
+
+%description doc
+Extensive HTML documentation for %{name}. Contains the complete liquidsoap
+website and documentation as generated from the source plus examples.
+
+
 %prep
 %setup -q
+# fix for E: incorrect-fsf-address
+grep -rl --include="*.ml" --include="*.mll" --include="*.mly" 'Temple Place' src/ | xargs -n1 sed -i -e 's@59 Temple Place, Suite 330, Boston, MA  02111-1307@51 Franklin Street, Fifth Floor, Boston, MA 02110-1301@g'
+# use _pic runtime variant if ocamlc was compiled with -fPIC
+ocamlopt -config | grep 'ocamlc_cflags:.*-fPIC' >/dev/null && export OCAMLFLAGS="-runtime-variant _pic"
 # do not use the configure rpm macro due to this not being a classical autoconf based configure script
 ./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=%{_sysconfdir} --mandir=%{_mandir} --localstatedir=%{_localstatedir} --disable-ldconf
 
 %build
 make
+make doc
 
 %install
 # do not use the make_install rpm macro due to this not being a classical automake based makefile
@@ -118,15 +136,19 @@ exit 0
 %systemd_postun_with_restart liquidsoap@.service
 
 %files
-%{_exec_prefix}/bin/liquidsoap
-%{_unitdir}/liquidsoap@.service
-%config/etc/liquidsoap/radio.liq.example
-%config(noreplace)/etc/logrotate.d/liquidsoap
-%{_exec_prefix}/lib/liquidsoap/%{version}/
+%{_bindir}/%{name}
+%{_unitdir}/%{name}@.service
+%config%{_sysconfdir}/%{name}/radio.liq.example
+%config(noreplace)%{_sysconfdir}/logrotate.d/%{name}
+%{_exec_prefix}/lib/%{name}/%{version}/
 %doc README
 %doc
-%{_exec_prefix}/share/doc/liquidsoap-%{version}/examples/*.liq
-%{_mandir}/man1/liquidsoap.1.*
+%{_mandir}/man1/%{name}.1.*
+
+%files doc
+%doc
+%{_docdir}/%{name}-%{version}/html
+%{_docdir}/%{name}-%{version}/examples
 
 %changelog
 * Mon Dec 10 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.4-2
