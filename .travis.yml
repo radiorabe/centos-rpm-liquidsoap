@@ -1,0 +1,17 @@
+language: minimal
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: main
+      name: "RPMlint"
+      before_install:
+        - docker pull quay.io/hairmare/fedora_rpmdev
+      script: docker run --rm -ti -v `pwd`:'/git' quay.io/hairmare/fedora_rpmdev rpmlint liquidsoap.spec
+    - stage: main
+      name: "CentOS RPM"
+      before_install:
+        - docker pull quay.io/hairmare/centos_rpmdev
+      script: docker run --rm -ti -v `pwd`:'/git' quay.io/hairmare/centos_rpmdev /git/.travis/rpm.sh
