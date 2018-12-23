@@ -24,7 +24,7 @@
 
 Name:     liquidsoap 
 Version:  1.3.4
-Release:  2%{?dist}
+Release:  3%{?dist}
 Summary:  Audio and video streaming language
 
 License:  GPLv2
@@ -55,6 +55,7 @@ BuildRequires: ocaml-inotify-devel
 BuildRequires: ocaml-bjack-devel
 BuildRequires: ocaml-ladspa-devel
 BuildRequires: ocaml-lame-devel
+BuildRequires: ocaml-mad-devel
 BuildRequires: ocaml-magic-devel
 BuildRequires: ocaml-mm-devel
 BuildRequires: ocaml-ocamldoc
@@ -151,6 +152,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Sun Dec 23 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.4-3
+- Explicit BuildRequire for ocaml-mad-devel
+
 * Mon Dec 10 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.4-2
 - Initialize RPM changelog
 - Proper installation of runtime deps
