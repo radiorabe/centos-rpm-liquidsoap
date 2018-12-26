@@ -23,8 +23,8 @@
 #
 
 Name:     liquidsoap 
-Version:  1.3.4
-Release:  3%{?dist}
+Version:  1.3.5
+Release:  0.1%{?dist}
 Summary:  Audio and video streaming language
 
 License:  GPLv2
@@ -103,8 +103,6 @@ website and documentation as generated from the source plus examples.
 
 %prep
 %setup -q
-# fix for E: incorrect-fsf-address
-grep -rl --include="*.ml" --include="*.mll" --include="*.mly" 'Temple Place' src/ | xargs -n1 sed -i -e 's@59 Temple Place, Suite 330, Boston, MA  02111-1307@51 Franklin Street, Fifth Floor, Boston, MA 02110-1301@g'
 # use _pic runtime variant if ocamlc was compiled with -fPIC
 ocamlopt -config | grep 'ocamlc_cflags:.*-fPIC' >/dev/null && export OCAMLFLAGS="-runtime-variant _pic"
 # do not use the configure rpm macro due to this not being a classical autoconf based configure script
@@ -152,6 +150,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Tue Dec 25 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.5-0.1
+- Bump to 1.3.5
+
 * Sun Dec 23 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.4-3
 - Explicit BuildRequire for ocaml-mad-devel
 
