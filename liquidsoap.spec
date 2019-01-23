@@ -1,8 +1,8 @@
 #
 # spec file for package liquidsoap
 #
-# Copyright (c) 2018 Radio Bern RaBe
-#                    http://www.rabe.ch
+# Copyright (c) 2018 - 2019 Radio Bern RaBe
+#                           http://www.rabe.ch
 #
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as 
@@ -23,7 +23,7 @@
 #
 
 Name:     liquidsoap 
-Version:  1.3.5
+Version:  1.3.6
 Release:  0.1%{?dist}
 Summary:  Audio and video streaming language
 
@@ -150,6 +150,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Wed Jan 23 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.6-0.1
+- Bump to 1.3.6
+
 * Tue Dec 25 2018 Lucas Bickel <hairmare@rabe.ch> - 1.3.5-0.1
 - Bump to 1.3.5
 
