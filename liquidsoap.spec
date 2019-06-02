@@ -23,7 +23,7 @@
 #
 
 Name:     liquidsoap 
-Version:  1.3.6
+Version:  1.3.7
 Release:  0.1%{?dist}
 Summary:  Audio and video streaming language
 
@@ -150,6 +150,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Sun Jun 2 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.1
+- Bump to 1.3.7
+
 * Wed Jan 23 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.6-0.1
 - Bump to 1.3.6
 
