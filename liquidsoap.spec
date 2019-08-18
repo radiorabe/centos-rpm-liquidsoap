@@ -24,13 +24,16 @@
 
 Name:     liquidsoap 
 Version:  1.3.7
-Release:  0.1%{?dist}
+Release:  0.2%{?dist}
 Summary:  Audio and video streaming language
 
 License:  GPLv2
 URL:      http://liquidsoap.info/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/%{name}-%{version}.tar.bz2
 Source1:  liquidsoap@.service
+# I already bumped our flac module and this makes liquidsoap 1.3 build again, this won't be needed after
+# liquidsoap 1.4 is released though. 1.4 will depend on ocaml 4.08 which is another can of worms.
+Patch0:   https://github.com/savonet/liquidsoap/commit/ae4c7b067a379d74a4e47c8790a11ad038773916.patch
 
 BuildRequires: file-devel
 BuildRequires: flac-devel
@@ -103,6 +106,7 @@ website and documentation as generated from the source plus examples.
 
 %prep
 %setup -q
+%patch -P 0 -p 1
 # use _pic runtime variant if ocamlc was compiled with -fPIC
 ocamlopt -config | grep 'ocamlc_cflags:.*-fPIC' >/dev/null && export OCAMLFLAGS="-runtime-variant _pic"
 # do not use the configure rpm macro due to this not being a classical autoconf based configure script
@@ -150,6 +154,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Sun Aug 18 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.2
+- add patch to support ocaml-flac 0.1.5
+
 * Sun Jun 2 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.1
 - Bump to 1.3.7
 

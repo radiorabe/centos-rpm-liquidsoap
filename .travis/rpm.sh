@@ -15,7 +15,7 @@ case $OBS_OS in
     ;;
 "fedora")
     V=`source /etc/os-release; echo $VERSION_ID`
-    OBS_DIST="Fedora_${V}_standard"
+    OBS_DIST="Fedora_${V}"
     ;;
 esac
 
