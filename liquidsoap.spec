@@ -27,36 +27,45 @@
 
 Name:     liquidsoap 
 Version:  1.4.3
-Release:  0.1%{?dist}
+Release:  0.2%{?dist}
 Summary:  Audio and video streaming language
 
 License:  GPLv2
 URL:      http://liquidsoap.info/
 Source0:  https://github.com/savonet/liquidsoap/releases/download/v%{version}/%{name}-%{version}.tar.bz2
 Source1:  liquidsoap@.service
-Source2:  https://sources.debian.org/data/main/l/liquidsoap/1.4.3-1/debian/liquidsoap.xml
+Source2:  https://sources.debian.org/data/main/l/liquidsoap/1.4.3-2/debian/liquidsoap.xml
 Source3:  https://raw.githubusercontent.com/jgm/highlighting-kate/master/xml/language.dtd
 Patch0:   https://github.com/savonet/liquidsoap/commit/220838bbdbc73c219cc2d7e891a6cd1ab577cc67.patch?#/liquidsoap-1.4.3-ship-xml-definitions-manually.patch
 Patch1:   liquidsoap-1.4.3-no-curl-in-docs.patch
 
+BuildRequires: ffmpeg-devel
 BuildRequires: file-devel
 BuildRequires: flac-devel
+BuildRequires: giflib-devel
 BuildRequires: inotify-tools-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
-BuildRequires: libX11-devel
+BuildRequires: libexif-devel
+BuildRequires: libjpeg-turbo-devel
 BuildRequires: libmad-devel
+BuildRequires: libpng-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libstdc++-static
+BuildRequires: libtiff-devel
 BuildRequires: libvorbis-devel
+BuildRequires: libX11-devel
+BuildRequires: libXpm-devel
 BuildRequires: ocaml >= 4.08
 BuildRequires: ocaml-alsa-devel < 0.3.0
 BuildRequires: ocaml-biniou-devel
+BuildRequires: ocaml-camlimages-devel
 BuildRequires: ocaml-camomile-devel
 BuildRequires: ocaml-cry-devel
 BuildRequires: ocaml-dtools-devel
 BuildRequires: ocaml-duppy-devel
 BuildRequires: ocaml-easy-format-devel
+BuildRequires: ocaml-ffmpeg-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac-devel
 BuildRequires: ocaml-gen-devel
@@ -72,7 +81,9 @@ BuildRequires: ocaml-ocamldoc >= 4.08
 BuildRequires: ocaml-ogg-devel < 0.6.0
 BuildRequires: ocaml-opus-devel
 BuildRequires: ocaml-pcre-devel
+BuildRequires: ocaml-pulseaudio-devel
 BuildRequires: ocaml-samplerate-devel
+BuildRequires: ocaml-SDL-devel
 BuildRequires: ocaml-sedlex-devel
 BuildRequires: ocaml-soundtouch-devel
 BuildRequires: ocaml-speex-devel
@@ -87,6 +98,7 @@ BuildRequires: opus-devel
 BuildRequires: pandoc
 BuildRequires: perl-XML-DOM
 BuildRequires: pcre-devel
+BuildRequires: pulseaudio-libs-devel
 BuildRequires: soundtouch-devel
 BuildRequires: speex-devel
 BuildRequires: systemd
@@ -168,6 +180,12 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Wed Dec 23 2020 Lucas Bickel <hairmare@rabe.ch> - 1.4.3-0.2
+- add ffmpeg support
+- add pulseaudio support
+- add video support (ffmepg & camlimages)
+- add vizualization support (SDL)
+
 * Thu Dec 3 2020 Lucas Bickel <hairmare@rabe.ch> - 1.4.3-0.1
 - update to liquidsoap 1.4.3
 - drop CentOS 7 support, add Fedora 32+ support

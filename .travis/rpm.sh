@@ -14,8 +14,12 @@ case $OBS_OS in
     # somewhat adventurous install of deps since we have less control than in OBS
     dnf config-manager --set-disabled epel
 
+    dnf install -y \
+      https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
+
     dnf install -y --enablerepo=epel \
       flac-libs \
+      ffmpeg-libs \
       inotify-tools-devel \
       jack-audio-connection-kit-devel
 
@@ -23,8 +27,10 @@ case $OBS_OS in
       file-devel \
       flac \
       flac-devel \
+      giflib-devel \
       ladspa-devel \
       lame-devel \
+      libexif-devel \
       libmad-devel \
       libsamplerate-devel \
       libstdc++-static \
@@ -33,9 +39,13 @@ case $OBS_OS in
       opus-devel \
       pandoc \
       perl-XML-DOM \
+      SDL2-devel \
       soundtouch-devel \
       speex-devel \
       taglib-devel
+
+    dnf install -y --enablerepo=epel --enablerepo=PowerTools \
+      ocaml-camlimages
 
     # we install these explicitly until theier old versions get removed from OBS, on OBS they are deactivated for builds so this is not an issue
     dnf install -y --disablerepo=home_radiorabe_liquidsoap \
@@ -46,6 +56,8 @@ case $OBS_OS in
 "fedora")
     V=`source /etc/os-release; echo $VERSION_ID`
     OBS_DIST="Fedora_${V}"
+
+    dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
     ;;
 esac
 
