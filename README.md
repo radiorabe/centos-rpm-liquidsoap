@@ -8,7 +8,11 @@ This repository contains the specfile for [liquidsoap](http://liquidsoap.info/) 
 curl -o /etc/yum.repos.d/liquidsoap.repo \
      http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_8/home:radiorabe:liquidsoap.repo
 
-yum install liquidsoap
+dnf config-manager --enable PowerTools
+
+dnf install https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
+
+dnf install liquidsoap
 ```
 
 You might have to install some dependencies explicitly to get all the parts you need to work. This is due to the fact that liquidsoap does some runtime detection
