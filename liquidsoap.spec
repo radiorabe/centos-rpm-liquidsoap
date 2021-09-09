@@ -152,6 +152,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Thu Sep 9 2021 Marco Schmalz <marco@schess.ch> - 1.3.7-0.3
+- remove broken inotify compile-time dependency
+
 * Sun Aug 18 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.2
 - add patch to support ocaml-flac 0.1.5
 
