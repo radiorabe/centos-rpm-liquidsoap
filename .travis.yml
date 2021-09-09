@@ -13,8 +13,8 @@ jobs:
     - stage: main
       name: "CentOS RPM"
       before_install:
-        - docker pull quay.io/hairmare/centos8_rpmdev
-      script: docker run --rm -ti -v `pwd`:'/git' quay.io/hairmare/centos8_rpmdev /git/.travis/rpm.sh
+        - docker pull quay.io/hairmare/centos_rpmdev
+      script: docker run --rm -ti -v `pwd`:'/git' quay.io/hairmare/centos_rpmdev /git/.travis/rpm.sh
     - stage: main
       name: "Fedora RPM"
       before_install:

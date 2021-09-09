@@ -22,22 +22,18 @@
 # https://github.com/radiorabe/centos-rpm-liquidsoap
 #
 
-%define _emacs_sitelispdir %{_datadir}/emacs/site-lisp
-%define _bash_completiondir %{_sysconfdir}/bash_completion.d/
-
 Name:     liquidsoap 
-Version:  1.4.3
-Release:  0.1%{?dist}
+Version:  1.3.7
+Release:  0.2%{?dist}
 Summary:  Audio and video streaming language
 
 License:  GPLv2
 URL:      http://liquidsoap.info/
-Source0:  https://github.com/savonet/liquidsoap/releases/download/v%{version}/%{name}-%{version}.tar.bz2
+Source0:  https://github.com/savonet/liquidsoap/releases/download/%{version}/%{name}-%{version}.tar.bz2
 Source1:  liquidsoap@.service
-Source2:  https://sources.debian.org/data/main/l/liquidsoap/1.4.3-1/debian/liquidsoap.xml
-Source3:  https://raw.githubusercontent.com/jgm/highlighting-kate/master/xml/language.dtd
-Patch0:   https://github.com/savonet/liquidsoap/commit/220838bbdbc73c219cc2d7e891a6cd1ab577cc67.patch?#/liquidsoap-1.4.3-ship-xml-definitions-manually.patch
-Patch1:   liquidsoap-1.4.3-no-curl-in-docs.patch
+# I already bumped our flac module and this makes liquidsoap 1.3 build again, this won't be needed after
+# liquidsoap 1.4 is released though. 1.4 will depend on ocaml 4.08 which is another can of worms.
+Patch0:   https://github.com/savonet/liquidsoap/commit/ae4c7b067a379d74a4e47c8790a11ad038773916.patch
 
 BuildRequires: file-devel
 BuildRequires: flac-devel
@@ -49,31 +45,27 @@ BuildRequires: libmad-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libstdc++-static
 BuildRequires: libvorbis-devel
-BuildRequires: ocaml >= 4.08
-BuildRequires: ocaml-alsa-devel < 0.3.0
+BuildRequires: ocaml
+BuildRequires: ocaml-alsa-devel
 BuildRequires: ocaml-biniou-devel
-BuildRequires: ocaml-camomile-devel
 BuildRequires: ocaml-cry-devel
 BuildRequires: ocaml-dtools-devel
 BuildRequires: ocaml-duppy-devel
 BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac-devel
-BuildRequires: ocaml-gen-devel
 BuildRequires: ocaml-inotify-devel
 BuildRequires: ocaml-bjack-devel
 BuildRequires: ocaml-ladspa-devel
 BuildRequires: ocaml-lame-devel
 BuildRequires: ocaml-mad-devel
 BuildRequires: ocaml-magic-devel
-BuildRequires: ocaml-menhir-devel
-BuildRequires: ocaml-mm-devel < 0.6.0
-BuildRequires: ocaml-ocamldoc >= 4.08
-BuildRequires: ocaml-ogg-devel < 0.6.0
+BuildRequires: ocaml-mm-devel
+BuildRequires: ocaml-ocamldoc
+BuildRequires: ocaml-ogg-devel
 BuildRequires: ocaml-opus-devel
 BuildRequires: ocaml-pcre-devel
 BuildRequires: ocaml-samplerate-devel
-BuildRequires: ocaml-sedlex-devel
 BuildRequires: ocaml-soundtouch-devel
 BuildRequires: ocaml-speex-devel
 BuildRequires: ocaml-ssl-devel
@@ -84,7 +76,6 @@ BuildRequires: ocaml-xmlm-devel
 BuildRequires: ocaml-xmlplaylist-devel
 BuildRequires: ocaml-yojson-devel
 BuildRequires: opus-devel
-BuildRequires: pandoc
 BuildRequires: perl-XML-DOM
 BuildRequires: pcre-devel
 BuildRequires: soundtouch-devel
@@ -92,8 +83,8 @@ BuildRequires: speex-devel
 BuildRequires: systemd
 BuildRequires: taglib-devel
 %{?systemd_requires}
-# needed to find pkg-config in containers since they do not include which
-BuildRequires: which
+# needed to find pkg-config in my fedora containers since they do not include which
+%{?fedora:BuildRequires: which}
 Requires(pre): shadow-utils
 
 
@@ -115,13 +106,11 @@ website and documentation as generated from the source plus examples.
 
 %prep
 %setup -q
-%patch -P0 -p1
-cp %{SOURCE2} doc/
-cp %{SOURCE3} doc/
+%patch -P 0 -p 1
 # use _pic runtime variant if ocamlc was compiled with -fPIC
 ocamlopt -config | grep 'ocamlc_cflags:.*-fPIC' >/dev/null && export OCAMLFLAGS="-runtime-variant _pic"
 # do not use the configure rpm macro due to this not being a classical autoconf based configure script
-./configure --prefix=%{_exec_prefix} --sysconfdir=%{_sysconfdir} --mandir=%{_mandir} --localstatedir=%{_localstatedir} --disable-ldconf
+./configure --disable-camomile --prefix=%{_exec_prefix} --sysconfdir=%{_sysconfdir} --mandir=%{_mandir} --localstatedir=%{_localstatedir} --disable-ldconf
 
 %build
 make
@@ -132,7 +121,6 @@ make doc
 make install %{_exec_prefix} OCAMLFIND_DESTDIR=%{buildroot}%{_exec_prefix} prefix=%{buildroot}%{_exec_prefix} sysconfdir=%{buildroot}%{_sysconfdir} mandir=%{buildroot}%{_mandir} localstatedir=%{buildroot}%{_localstatedir}
 install -d %{buildroot}%{_unitdir}
 install -c %{SOURCE1} -m 644 %{buildroot}%{_unitdir}
-mv %{buildroot}${_exec_prefix}/usr/share/doc/%{name}/html %{buildroot}${_exec_prefix}/usr/share/doc/%{name}-%{version}/html
 
 %pre
 getent group liquidsoap >/dev/null || groupadd -r liquidsoap
@@ -153,12 +141,10 @@ exit 0
 %files
 %{_bindir}/%{name}
 %{_unitdir}/%{name}@.service
-%{_bash_completiondir}/%{name}
-%{_emacs_sitelispdir}/%{name}-mode/%{name}-mode.el
 %config%{_sysconfdir}/%{name}/radio.liq.example
 %config(noreplace)%{_sysconfdir}/logrotate.d/%{name}
-%{_exec_prefix}/share/%{name}/%{version}/
-%doc README.md CHANGES.md
+%{_exec_prefix}/lib/%{name}/%{version}/
+%doc README
 %doc
 %{_mandir}/man1/%{name}.1.*
 
@@ -168,10 +154,6 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
-* Thu Dec 3 2020 Lucas Bickel <hairmare@rabe.ch> - 1.4.3-0.1
-- update to liquidsoap 1.4.3
-- drop CentOS 7 support, add Fedora 32+ support
-
 * Sun Aug 18 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.2
 - add patch to support ocaml-flac 0.1.5
 
