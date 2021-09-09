@@ -37,7 +37,6 @@ Patch0:   https://github.com/savonet/liquidsoap/commit/ae4c7b067a379d74a4e47c879
 
 BuildRequires: file-devel
 BuildRequires: flac-devel
-BuildRequires: inotify-tools-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
 BuildRequires: libX11-devel
@@ -54,7 +53,6 @@ BuildRequires: ocaml-duppy-devel
 BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac-devel
-BuildRequires: ocaml-inotify-devel
 BuildRequires: ocaml-bjack-devel
 BuildRequires: ocaml-ladspa-devel
 BuildRequires: ocaml-lame-devel
