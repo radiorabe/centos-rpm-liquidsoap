@@ -2,17 +2,17 @@
 
 This repository contains the specfile for [liquidsoap](http://liquidsoap.info/) which is part of the [RaBe liquidsoap distribution](https://build.opensuse.org/project/show/home:radiorabe:liquidsoap).
 
+It depends on `libmad` and `lame` from the [nux dextop repo](http://li.nux.ro/repos.html).
+
 ## Install
 
 ```bash
+yum install epel-release
+
 curl -o /etc/yum.repos.d/liquidsoap.repo \
-     http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_8/home:radiorabe:liquidsoap.repo
+     http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
 
-dnf config-manager --enable PowerTools
-
-dnf install https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
-
-dnf install liquidsoap
+yum install liquidsoap
 ```
 
 You might have to install some dependencies explicitly to get all the parts you need to work. This is due to the fact that liquidsoap does some runtime detection
@@ -49,8 +49,7 @@ You could also create the `liquidsoap` user beforehand and ensure that it has ac
 
 ### Enable fdk-aac
 
-If you want to enable `%fdkaac` output you will need to provide a library that can be loaded dynamically. These
-instructions need updating for CentOS 8 with Liquidsoap 1.4.x
+If you want to enable `%fdkaac` output you will need to provide a library that can be loaded dynamically.
 
 The following example uses `fdk-aac` from the [Nux Dextop Repos](https://li.nux.ro/repos.html) but the
 alternative packages available from [RPMFusion](https://rpmfusion.org) should work as well.
