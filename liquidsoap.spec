@@ -37,7 +37,6 @@ Patch0:   https://github.com/savonet/liquidsoap/commit/ae4c7b067a379d74a4e47c879
 
 BuildRequires: file-devel
 BuildRequires: flac-devel
-BuildRequires: inotify-tools-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
 BuildRequires: libX11-devel
@@ -54,7 +53,6 @@ BuildRequires: ocaml-duppy-devel
 BuildRequires: ocaml-easy-format-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-flac-devel
-BuildRequires: ocaml-inotify-devel
 BuildRequires: ocaml-bjack-devel
 BuildRequires: ocaml-ladspa-devel
 BuildRequires: ocaml-lame-devel
@@ -154,6 +152,9 @@ exit 0
 %{_docdir}/%{name}-%{version}/examples
 
 %changelog
+* Thu Sep 9 2021 Marco Schmalz <marco@schess.ch> - 1.3.7-0.3
+- remove broken inotify compile-time dependency
+
 * Sun Aug 18 2019 Lucas Bickel <hairmare@rabe.ch> - 1.3.7-0.2
 - add patch to support ocaml-flac 0.1.5
 
